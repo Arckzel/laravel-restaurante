@@ -20568,9 +20568,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    cardapios: {
+      type: Array,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      pratos: null
+    };
+  },
   components: {
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head,
     Layout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  methods: {
+    getTodosPratos: function getTodosPratos() {
+      var _this = this;
+      axios.get(route('getTodosPratos')).then(function (response) {
+        _this.pratos = response.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getTodosPratos();
   }
 });
 

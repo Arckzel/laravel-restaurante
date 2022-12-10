@@ -103,10 +103,42 @@ import Layout from '@/Layouts/Authenticated.vue'
 
 export default {
 
+    props:{
+        cardapios:{
+            type: Array,
+            required: true
+        }
+    },  
+
+    data(){
+        return{
+            pratos: null
+        }
+    },
+
     components: {
         Head,
         Layout
+    },
+
+    methods: {
+        getTodosPratos(){
+            axios.
+                get(
+                    route('getTodosPratos')
+                ).then(
+                    response => {
+                        this.pratos = response.data
+                    }
+                )
+        }
+    },
+
+    mounted(){
+        this.getTodosPratos()
     }
+
+
 
 }
 </script>
