@@ -35,8 +35,8 @@
                                     <td v-if="prato.cardapio_id == cardapio.id" class="w-6/12 text-center">{{prato.nome}}</td>
                                     <td v-if="prato.cardapio_id == cardapio.id" class="w-3/12 text-center">R${{prato.valor}}</td>
                                     <td v-if="prato.cardapio_id == cardapio.id" class="w-3/12 text-center">
-                                        <a class="bg-slate-200 px-2 rounded-lg mx-1 cursor-pointer" :href="null">-</a>
-                                        <a class="bg-green-400 px-2 rounded-lg mx-1 cursor-pointer" :href="null">+</a>
+                                        <a class="bg-slate-200 px-2 rounded-lg mx-1 cursor-pointer" :href="null" v-on:click="removerDoCarrinho(prato)" >-</a>
+                                        <a class="bg-green-400 px-2 rounded-lg mx-1 cursor-pointer" :href="null" v-on:click="adicionarAoCarrinho(prato)">+</a>
                                     </td>
                                 </tr>
                             </table>
@@ -53,18 +53,18 @@
                             Carrinho
                         </h1>
 
-                        <div>
+                        <div v-if="carrinho.length > 0">
                             <div class="grid grid-cols-7">
                                 <p class="col-span-5">Prato</p>
                                 <p class="col-span-2">Valor</p>
                             </div>
-                            <div>
+                            <div v-for="pedido in carrinho" :key="pedido">
                                 <div class="grid grid-cols-7">
                                     <div class="col-span-5">
-                                        <p>Calabresa x2</p>
+                                        <p>{{pedido.prato.nome}} x{{pedido.quantidade}}</p>
                                     </div>
                                     <div class="col-span-2">
-                                        <p>R$50.0</p>
+                                        <p>R${{pedido.prato.valor * pedido.quantidade}}</p>
                                     </div>
                                 </div>
                                 <div>
@@ -78,10 +78,13 @@
                                     <p class="col-span-2"> R$50.0</p>
                                 </div>  
                                 <div class="text-center mt-10 mb-10">
-                                    <a :href="null" class="bg-green-600 px-5 py-2 rounded-lg mx-1 text-white">Finalizar Compra</a>
+                                    <a :href="null" class="bg-green-600 px-5 py-2 rounded-lg mx-1 text-white cursor-pointer" v-on:click="finalizar()">Finalizar Compra</a>
                                 </div>                              
                             </div>
 
+                        </div>
+                        <div class="text-center">
+                            <h1>Adicione algo ao carrinho</h1>
                         </div>
 
                     </div>
@@ -112,7 +115,9 @@ export default {
 
     data(){
         return{
-            pratos: null
+            pratos: null,
+            carrinho: [],
+            total: 0
         }
     },
 
@@ -131,7 +136,45 @@ export default {
                         this.pratos = response.data
                     }
                 )
+        },
+
+        adicionarAoCarrinho(prato){
+            var encontrado = false;
+            this.carrinho.forEach(element => {
+                if(element.prato.id == prato.id){
+                    element.quantidade += 1,
+                    encontrado = true
+                }
+            })
+
+            if(!encontrado){
+                this.carrinho.push({
+                    prato: prato,
+                    quantidade: 1
+                })
+            }
+        },
+
+        removerDoCarrinho(prato){
+            var encontrado = false;
+            this.carrinho.forEach(element => {
+                if(element.prato.id == prato.id){
+                    encontrado = true
+                    if(element.quantidade > 1){
+                        element.quantidade -= 1
+                    }else{
+                        this.carrinho.splice(this.carrinho.indexOf(element),1)
+                    }
+                }
+            });
+        },
+
+        finalizar(){
+            this.carrinho = []
         }
+
+
+
     },
 
     mounted(){
