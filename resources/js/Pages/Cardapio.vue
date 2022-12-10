@@ -83,8 +83,8 @@
                             </div>
 
                         </div>
-                        <div class="text-center">
-                            <h1>Adicione algo ao carrinho</h1>
+                        <div class="text-center" v-else>
+                            <h1 class="font-semibold text-1xl text-gray-800 leading-tight">Adicione algo ao carrinho</h1>
                         </div>
 
                     </div>
