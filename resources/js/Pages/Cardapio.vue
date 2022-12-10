@@ -12,16 +12,16 @@
 
             <div class="grid grid-cols-7 max-w-7xl mx-auto">
 
-                <div class="col-span-5 bg-white px-3 shadow-sm rounded-lg">
-                    <div class="p-6 border-b border-gray-200">
+                <div class="col-span-5 bg-white px-3 shadow-sm rounded-lg ">
+                    <div class="p-6 border-b border-gray-200 pb-20">
                         <h1 class="font-semibold text-2xl my-5 text-gray-600 text-center">
                             Faça Seu Pedido
                         </h1>
                         <hr class="my-5">
 
-                        <div>
+                        <div v-for="cardapio in cardapios" :key="cardapio.id">
 
-                            <h1 class="font-semibold text-xl my-5 text-gray-800">Pizzas</h1>
+                            <h1 class="font-semibold text-xl my-5 text-gray-800">{{cardapio.nome}}</h1>
 
                             <table class="w-8/12 mx-auto">
                                 <tr class="bg-slate-100">
@@ -30,11 +30,11 @@
                                     <th class="w-3/12 mx-auto border-4 border-solid border-white">Preço</th>
                                     <th class="w-3/12 mx-auto border-4 border-solid border-white">Pedir</th>
                                 </tr>
-                                <tr class="border-b border-solid border-gray p2">
-                                    <td class="w-1/12 text-center">0</td>
-                                    <td class="w-6/12 text-center">Calabresa</td>
-                                    <td class="w-3/12 text-center">R$25.50</td>
-                                    <td class="w-3/12 text-center">
+                                <tr v-for="prato in pratos" :key="prato.id" class="border-b border-solid border-gray p2">
+                                    <td v-if="prato.cardapio_id == cardapio.id" class="w-1/12 text-center">{{prato.id}}</td>
+                                    <td v-if="prato.cardapio_id == cardapio.id" class="w-6/12 text-center">{{prato.nome}}</td>
+                                    <td v-if="prato.cardapio_id == cardapio.id" class="w-3/12 text-center">R${{prato.valor}}</td>
+                                    <td v-if="prato.cardapio_id == cardapio.id" class="w-3/12 text-center">
                                         <a class="bg-slate-200 px-2 rounded-lg mx-1 cursor-pointer" :href="null">-</a>
                                         <a class="bg-green-400 px-2 rounded-lg mx-1 cursor-pointer" :href="null">+</a>
                                     </td>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="ml-5 col-span-2 bg-white px-3 shadow-sm rounded-lg">
+                <div class="ml-5 col-span-2 bg-white px-3 shadow-sm rounded-lg h-fit">
                     <div class="p-3 ">
 
                         <h1 class="font-semibold text-2xl pt-3 pb-5 my-5 text-gray-800 text-center border-b border-gray-200">
