@@ -75,7 +75,7 @@
                             <div>
                                 <div class="grid grid-cols-7">
                                     <p class="col-span-5"> TOTAL</p>
-                                    <p class="col-span-2"> R$50.0</p>
+                                    <p class="col-span-2"> R${{total}}</p>
                                 </div>  
                                 <div class="text-center mt-10 mb-10">
                                     <a :href="null" class="bg-green-600 px-5 py-2 rounded-lg mx-1 text-white cursor-pointer" v-on:click="finalizar()">Finalizar Compra</a>
@@ -153,6 +153,7 @@ export default {
                     quantidade: 1
                 })
             }
+            this.atualizarTotal()
         },
 
         removerDoCarrinho(prato){
@@ -167,13 +168,20 @@ export default {
                     }
                 }
             });
+            this.atualizarTotal()
+        },
+
+
+        atualizarTotal(){
+            this.total = 0;
+            this.carrinho.forEach(element => {
+                this.total += element.prato.valor * element.quantidade
+            })
         },
 
         finalizar(){
-            this.carrinho = []
+            this.carrinho= []
         }
-
-
 
     },
 
