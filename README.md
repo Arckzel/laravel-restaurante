@@ -2,7 +2,7 @@
 
 <h1 align="center"> Restaurante </h1>
 
-Esse projeto de um restaurante fictício foi criado por mim enquanto ministrava o **Curso de Aprimoramento de Desenvolvimento em PHP com Laravel e VueJs**, que teve como objetivo o compartilhamento de conhecimentos e experiências para apresentar e ensinar novas tecnologias para os alunos do IFPB - Campus Monteiro. Sendo um projeto de fins totalmente educativos.
+Esse projeto de um restaurante fictício foi criado por mim enquanto ministrava o [**Curso de Aprimoramento de Desenvolvimento em PHP com Laravel e VueJs**](https://www.youtube.com/playlist?list=PLX6YAs9mP4e0UkurTVrsmrVBxgpViNzhy), que teve como objetivo o compartilhamento de conhecimentos e experiências para apresentar e ensinar novas tecnologias para os alunos do IFPB - Campus Monteiro. Sendo um projeto de fins totalmente educativos.
 
 O projeto foi desenvolvido em partes, sendo explicado e construído em um módulo de 9 aulas, sendo elas:
 
